@@ -25,12 +25,12 @@ bool initOLED() {
   const uint8_t oled_addr= 0x3C; // SSD1315 thường là 0x3C
 
   if (!isI2CDevicePresent(oled_addr)) {
-    Serial.println("Không tìm thấy OLED trên I2C!");
+    // Serial.println("Không tìm thấy OLED trên I2C!");
     return false;
   }
 
   if (!display.begin(SSD1306_SWITCHCAPVCC, oled_addr)) {
-    Serial.println("display.begin() thất bại!");
+    // Serial.println("display.begin() thất bại!");
     return false;
   }
 
