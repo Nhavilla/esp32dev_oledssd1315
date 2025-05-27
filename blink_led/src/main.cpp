@@ -9,10 +9,10 @@
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // Thay thông tin mạng của bạn ở đây
-const char *ssid          = "MVI";
-const char *password      = "Tech@2023";
-const int   ledPin        = 2;     // Chân LED trên ESP32
-bool        isConnectWifi = false; // Biến để kiểm tra kết nối WiFi
+const char *ssid         = "MVI";
+const char *password     = "Tech@2023";
+const int   ledPin       = 2;     // Chân LED trên ESP32
+bool        isConnectWifi= false; // Biến để kiểm tra kết nối WiFi
 
 bool isI2CDevicePresent(uint8_t address) {
   Wire.beginTransmission(address);
@@ -22,7 +22,7 @@ bool isI2CDevicePresent(uint8_t address) {
 bool initOLED() {
   Wire.begin(21, 22); // SDA, SCL cho ESP32
 
-  const uint8_t oled_addr = 0x3C; // SSD1315 thường là 0x3C
+  const uint8_t oled_addr= 0x3C; // SSD1315 thường là 0x3C
 
   if (!isI2CDevicePresent(oled_addr)) {
     Serial.println("Không tìm thấy OLED trên I2C!");
@@ -39,8 +39,7 @@ bool initOLED() {
   Serial.println("OLED đã khởi tạo thành công!");
   return true;
 }
-void showTextOLED(const String &text, uint8_t size = 1, int16_t x = 0,
-                  int16_t y = 0) {
+void showTextOLED(const String &text, uint8_t size= 1, int16_t x= 0, int16_t y= 0) {
   display.clearDisplay();
   display.setTextSize(size);
   display.setTextColor(SSD1306_WHITE);
@@ -64,13 +63,13 @@ bool connectWifi() {
 
   // Kết nối thành công
   Serial.println("");
-  Serial.println("Da ket noi WiFi!");
+  Serial.println("Da ket noi WiFi");
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
   Serial.print("MAC Address: ");
   Serial.println(WiFi.macAddress());
 
-  isConnectWifi = true; // Đặt biến kết nối WiFi là true
+  isConnectWifi= true; // Đặt biến kết nối WiFi là true
   return isConnectWifi;
 }
 
@@ -83,16 +82,16 @@ void setup() {
   if (initOLED()) {
     showTextOLED("Hello ESP32!", 2); // size 2, vị trí (0,0)
   } else {
-    Serial.println("Khong the khoi tao OLED");
-    int iOut = 0;
+    // Serial.println("Khong the khoi tao OLED");
+    int iOut= 0;
     while (true) {
       digitalWrite(ledPin, LOW);  // tat LED
       delay(100);                 // Đợi 200 ms
       digitalWrite(ledPin, HIGH); // bat LED
       delay(100);
-      iOut += 1;
+      iOut+= 1;
       if (iOut > 20) { // sau 20 lần thì thoát
-        Serial.println("Khong the khoi tao OLED");
+        // Serial.println("Khong the khoi tao OLED");
         break;
       }
     }
