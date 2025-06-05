@@ -17,26 +17,6 @@ typedef struct {
 #endif // ANIMATED_GIF_DEFINED
 // Hàm tổng quát để hiển thị GIF
 
-void playGIF(const AnimatedGIF *gif) {
-  for (uint8_t frame= 0; frame < gif->frame_count; frame++) {
-    display.clearDisplay();
-
-    // Hiển thị khung hình hiện tại
-    for (uint16_t y= 0; y < gif->height; y++) {
-      for (uint16_t x= 0; x < gif->width; x++) {
-        uint16_t byteIndex= y * (((gif->width + 7) / 8)) + (x / 8);
-        uint8_t  bitIndex = 7 - (x % 8);
-        if (gif->frames[frame][byteIndex] & (1 << bitIndex)) {
-          display.drawPixel(x, y, WHITE);
-        }
-      }
-    }
-
-    display.display();
-    delay(gif->delays[frame]);
-  }
-}
-
 // Định nghĩa hằng số cho daichi_intro
 #define DAICHI_INTRO_FRAME_COUNT 225
 #define DAICHI_INTRO_WIDTH       128
@@ -17844,8 +17824,5 @@ const AnimatedGIF daichi_intro_gif= {
     .height     = DAICHI_INTRO_HEIGHT,
     .delays     = daichi_intro_delays,
     .frames     = daichi_intro_frames};
-
-// Trong hàm setup hoặc loop, bạn có thể gọi:
-// playGIF(&daichi_intro_gif);
 
 #endif
